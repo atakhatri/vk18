@@ -18,7 +18,7 @@ const SectionHeader = ({
         initial={{ opacity: 0, x: -20 }}
         animate={isInView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.6 }}
-        className="text-blue-500 font-bold tracking-widest uppercase mb-2"
+        className="text-blue-500 font-bold tracking-widest uppercase mb-0 md:mb-2"
       >
         {subtitle}
       </motion.p>
@@ -26,7 +26,7 @@ const SectionHeader = ({
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="text-5xl md:text-7xl font-black text-white"
+        className="text-4xl md:text-7xl font-black text-white mb-0 md:mb-4"
       >
         {title.split("").map((char, i) => (
           <span

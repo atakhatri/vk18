@@ -9,14 +9,55 @@ import {
     Flame,
     TrophyIcon,
 } from "lucide-react";
+
 interface Stat {
     label: string;
     value: string;
     sub: string;
     icon: React.ElementType;
     imageUrl?: string;
+    details?: centuriesDetail[] | runsDetail[] | avgDetail[] | potsDetail[] | highScoreDetail[] | captaincyDetail[] | fiftiesDetail[] | awardsDetail[];
 }
 
+interface centuriesDetail {
+    nation: string;
+    centuries: number;
+}
+
+interface runsDetail {
+    nation: string;
+    runs: string | number;
+}
+
+interface avgDetail {
+    nation: string;
+    avg: number;
+}
+
+interface potsDetail {
+    nation: string;
+    pots: number;
+}
+
+interface highScoreDetail {
+    nation: string;
+    highScore: number;
+}
+
+interface captaincyDetail {
+    nation: string;
+    winPercentage: number;
+}
+
+interface fiftiesDetail {
+    nation: string;
+    fifties: number;
+}
+
+interface awardsDetail {
+    awards: string;
+    years: number;
+}
 
 const STATS: Stat[] = [
     {
@@ -25,6 +66,7 @@ const STATS: Stat[] = [
         sub: "Second Highest",
         icon: Trophy,
         imageUrl: "/vk_centuries.png",
+        details: [{ nation: "Australia", centuries: 17 }, { nation: "Sri Lanka", centuries: 15 }, { nation: "England", centuries: 14 }],
     },
     {
         label: "Intl. Runs",
@@ -32,6 +74,7 @@ const STATS: Stat[] = [
         sub: "Active Legend",
         icon: BarChart3,
         imageUrl: "/vk_runs.png",
+        details: [{ nation: "Australia", runs: "4600+" }, { nation: "Sri Lanka", runs: "4200+" }, { nation: "England", runs: "4900+" }],
     },
     {
         label: "Batting Avg",
@@ -39,6 +82,7 @@ const STATS: Stat[] = [
         sub: "in Internationals",
         icon: Target,
         imageUrl: "/vk_avg.png",
+        details: [{ nation: "Australia", avg: 55.2 }, { nation: "Sri Lanka", avg: 50.1 }, { nation: "England", avg: 58.7 }],
     },
     {
         label: "Player of Series",
@@ -46,16 +90,20 @@ const STATS: Stat[] = [
         sub: "Highest in Internationals",
         icon: Award,
         imageUrl: "/vk_pots.png",
+        details: [{ nation: "Australia", pots: 5 }, { nation: "Sri Lanka", pots: 4 }, { nation: "England", pots: 6 }],
     },
-    { label: "Highest Score", value: "254", sub: "vs South Africa", icon: Zap, imageUrl: "/vk_highest.png" },
-    { label: "Captaincy Wins", value: "70%", sub: "Overall", icon: HomeIcon, imageUrl: "/vk_cap.png" },
-    { label: "T20I Fifties", value: "28", sub: "Second Highest", icon: Flame, imageUrl: "/vk2016.png" },
+    {
+        label: "Highest Score", value: "254", sub: "vs South Africa", icon: Zap, imageUrl: "/vk_highest.png", details: [{ nation: "Australia", highScore: 254 }, { nation: "Sri Lanka", highScore: 248 }, { nation: "England", highScore: 250 }]
+    },
+    { label: "Captaincy Wins", value: "70%", sub: "Overall", icon: HomeIcon, imageUrl: "/vk_cap.png", details: [{ nation: "Australia", winPercentage: 72 }, { nation: "Sri Lanka", winPercentage: 68 }, { nation: "England", winPercentage: 75 }] },
+    { label: "T20I Fifties", value: "28", sub: "Second Highest", icon: Flame, imageUrl: "/vk2016.png", details: [{ nation: "Australia", fifties: 8 }, { nation: "Sri Lanka", fifties: 7 }, { nation: "England", fifties: 9 }] },
     {
         label: "ICC Awards",
         value: "9",
         sub: "Most by any player",
         icon: TrophyIcon,
         imageUrl: "/vk_awards.png",
+        details: [{ awards: "ICC Player of the Year", years: 3 }, { awards: "ICC ODI Player of the Year", years: 4 }, { awards: "ICC T20I Player of the Year", years: 2 }],
     },
 ];
 

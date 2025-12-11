@@ -40,7 +40,7 @@ const FloatingNav = () => {
           : "translate-y-20 opacity-0 pointer-events-none"
       }`}
     >
-      <div className="bg-gray-900/80 backdrop-blur-xl border border-gray-700 rounded-full px-2 py-2 shadow-2xl">
+      <div className="bg-gray-900/80 backdrop-blur-xl border border-gray-700 rounded-full px-2 py-2 mx-6 shadow-2xl">
         <div className="flex items-center gap-2">
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -50,7 +50,7 @@ const FloatingNav = () => {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`group relative flex items-center gap-2 px-6 py-2 rounded-full transition-all duration-300 ${
+                className={`group relative flex items-center gap-2 px-4 md:px-6 py-1 md:py-2 rounded-full transition-all duration-300 ${
                   isActive
                     ? "bg-blue-500/20 text-white"
                     : "text-gray-400 hover:text-white hover:bg-white/10"

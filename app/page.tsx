@@ -50,9 +50,8 @@ export default function Home() {
       <section id="hero" className="relative h-screen overflow-hidden">
         {/* Background Image with Parallax */}
         <motion.div
-          className="absolute inset-0 bg-cover bg-center scale-110"
+          className="absolute inset-0 bg-cover bg-center scale-110 bg-[url('/vk_mobile.jpeg')] md:bg-[url('/virat2022.jpg')]"
           style={{
-            backgroundImage: "url('/virat2022.jpg')",
             y: bgParallax,
           }}
         />
@@ -79,7 +78,7 @@ export default function Home() {
             <SectionHeader title="VIRAT-KOHLI" subtitle="" />
 
             <p className="mb-8 text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto font-light">
-              Former Indian Captain | Modern Master | King of Chases
+              Former Ind Captain | King of Chases
             </p>
 
             {/* Quick Stats */}
@@ -122,11 +121,11 @@ export default function Home() {
       </section>
 
       {/* --- STATS SECTION --- */}
-      <section id="stats" className="py-32 relative">
-        <div className="container mx-auto px-6">
+      <section id="stats" className="py-6 relative">
+        <div className="container mx-auto px-3 md:px-6">
           <SectionHeader title="THE-NUMBERS" subtitle="Career Statistics" />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
             {STATS.map((stat, i) => (
               <StatCard key={i} stat={stat} index={i} />
             ))}
@@ -135,11 +134,11 @@ export default function Home() {
       </section>
 
       {/* --- CHASES STATS SECTION --- */}
-      <section className="py-16 ">
-        <div className="container mx-auto px-6">
-          <SectionHeader title="THE-CHASE-MASTER" subtitle="Chasing Records" />
+      <section className="py-6 ">
+        <div className="container mx-auto px-3 md:px-6">
+          <SectionHeader title="CHASE-MASTER" subtitle="Chasing Records" />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 mt-8">
             {CHASES_STATS_DATA.map((stat, i) => (
               <StatCard key={i} stat={stat} index={i} />
             ))}
@@ -148,11 +147,11 @@ export default function Home() {
       </section>
 
       {/* --- BEST MATCHES SECTION --- */}
-      <section className="py-16 ">
-        <div className="container mx-auto px-6">
+      <section className="py-8 ">
+        <div className="container mx-auto px-3 md:px-6">
           <SectionHeader title="TOP-KNOCKS" subtitle="Best Matches" />
 
-          <div className="mt-8">
+          <div className="mt-0">
             {BEST_MATCHES.map((match, i) => (
               <MatchRow key={i} match={match} index={i} />
             ))}
@@ -174,13 +173,13 @@ export default function Home() {
             whileInView={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <h3 className="text-4xl md:text-6xl font-black italic leading-tight mb-8">
+            <h3 className="text-3xl md:text-6xl font-black italic leading-tight mb-8">
               "I don't play for records.
               <br />
               <span className="text-blue-500">I play to win</span> matches for
               my country."
             </h3>
-            <div className="w-24 h-1 bg-blue-500 mx-auto rounded-full" />
+            <div className="w-24 h-1 bg-amber-500 mx-auto rounded-full" />
           </motion.div>
         </div>
       </section>
