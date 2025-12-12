@@ -2,16 +2,18 @@
 
 import { useState, useEffect } from "react";
 import { HomeIcon, Blend, SwordsIcon, Flame } from "lucide-react";
+import { useRouter, usePathname } from "next/navigation";
 
 const FloatingNav = () => {
-  const [activeSection, setActiveSection] = useState("hero");
+  const router = useRouter();
+  const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(false);
 
   const navItems = [
-    { id: "hero", icon: HomeIcon, label: "OVERVIEW" },
-    { id: "ODIs", icon: Blend, label: "ODIs" },
-    { id: "TESTs", icon: SwordsIcon, label: "TESTs" },
-    { id: "T20Is", icon: Flame, label: "T20Is" },
+    { link: "/", icon: HomeIcon, label: "OVERVIEW" },
+    { link: "/odi", icon: Blend, label: "ODIs" },
+    { link: "/tests", icon: SwordsIcon, label: "TESTs" },
+    { link: "/t20is", icon: Flame, label: "T20Is" },
   ];
 
   useEffect(() => {
@@ -23,14 +25,6 @@ const FloatingNav = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const scrollToSection = (sectionId: string) => {
-    setActiveSection(sectionId);
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <nav
@@ -44,16 +38,16 @@ const FloatingNav = () => {
         <div className="flex items-center gap-2">
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActive = activeSection === item.id;
+            const isActive = pathname === item.link;
 
             return (
               <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                key={item.link}
+                onClick={() => router.push(item.link)}
                 className={`group relative flex items-center gap-2 px-4 md:px-6 py-1 md:py-2 rounded-full transition-all duration-300 ${
                   isActive
-                    ? "bg-blue-500/20 text-white"
-                    : "text-gray-400 hover:text-white hover:bg-white/10"
+                    ? "bg-blue-600 text-white shadow-lg shadow-blue-500/25"
+                    : "text-gray-400 hover:text-white hover:bg-white/5"
                 }`}
               >
                 <Icon

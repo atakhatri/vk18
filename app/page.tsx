@@ -1,4 +1,3 @@
-"useqc";
 "use client";
 import {
   motion,
@@ -78,7 +77,7 @@ export default function Home() {
             <SectionHeader title="VIRAT-KOHLI" subtitle="" />
 
             <p className="mb-8 text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto font-light">
-              Former Ind Captain | King of Chases
+              Former IND Captain | Chase Master
             </p>
 
             {/* Quick Stats */}
