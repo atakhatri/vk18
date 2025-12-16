@@ -9,6 +9,7 @@ const FloatingNav = () => {
   const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
+  const [showCredit, setShowCredit] = useState(false);
 
   const navItems = [
     { link: "#hero", icon: HomeIcon, label: "OVERVIEW" },
@@ -20,6 +21,7 @@ const FloatingNav = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsVisible(window.scrollY > 100);
+      setShowCredit(window.scrollY > window.innerHeight + 200);
 
       // Determine active section based on scroll position
       navItems.forEach((item) => {
@@ -43,7 +45,7 @@ const FloatingNav = () => {
           : "translate-y-20 opacity-0 pointer-events-none"
       }`}
     >
-      <div className="bg-gray-900/80 backdrop-blur-xl border border-gray-700 rounded-full px-2 py-2 mx-6 shadow-2xl">
+      <div className="bg-gray-900/80 backdrop-blur-xl border border-gray-700 rounded-full px-2 py-2 shadow-2xl">
         <div className="flex items-center gap-2">
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -89,6 +91,43 @@ const FloatingNav = () => {
           })}
         </div>
       </div>
+
+      {/* Stats Capsule (Left) */}
+      <div
+        className={`absolute right-full top-1/2 -translate-y-1/2 mr-2 transition-all duration-500 hidden md:block ${
+          showCredit
+            ? "opacity-100 translate-x-0"
+            : "opacity-0 translate-x-4 pointer-events-none"
+        }`}
+      >
+        <div className="bg-gray-900/80 backdrop-blur-xl border border-gray-700 rounded-full px-2 py-2 shadow-2xl whitespace-nowrap">
+          <div className="px-4 py-2 rounded-full flex items-center">
+            <span className="text-sm text-gray-400 font-medium">
+              stats as per dec-2025
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Credit Capsule */}
+      <a
+        href="https://portify-amber.vercel.app/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`absolute left-full top-1/2 -translate-y-1/2 ml-2 transition-all duration-500 hidden md:block ${
+          showCredit
+            ? "opacity-100 translate-x-0"
+            : "opacity-0 -translate-x-4 pointer-events-none"
+        }`}
+      >
+        <div className="bg-gray-900/80 backdrop-blur-xl border border-gray-700 rounded-full px-2 py-2 shadow-2xl whitespace-nowrap">
+          <div className="px-4 py-2 rounded-full hover:bg-white/5 transition-colors flex items-center">
+            <span className="text-sm text-gray-400 font-medium">
+              Created by ATA KHATRI
+            </span>
+          </div>
+        </div>
+      </a>
     </nav>
   );
 };

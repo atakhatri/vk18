@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, Laptop, Smartphone, X } from "lucide-react";
 import {
   motion,
   useScroll,
@@ -28,8 +28,14 @@ export default function Home() {
   });
 
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [showMobileWarning, setShowMobileWarning] = useState(false);
 
   useEffect(() => {
+    // Check for mobile device on mount
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+      setShowMobileWarning(true);
+    }
+
     const handleScroll = () => {
       setShowBackToTop(window.scrollY > 500);
     };
@@ -183,7 +189,10 @@ export default function Home() {
       {/* --- GALLERY / QUOTE SECTION --- */}
       <section id="gallery" className="py-20 relative">
         <div className="container mx-auto px-3 md:px-6 mb-12">
-          <SectionHeader title="GALLERY" subtitle="Moments of Glory" />
+          <SectionHeader
+            title="TROPHIES"
+            subtitle="Moments of Glory | Player Who Completed Cricket"
+          />
         </div>
         <InfiniteGallery />
       </section>
@@ -209,6 +218,67 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      {/* Mobile Experience Warning Modal */}
+      {showMobileWarning && (
+        <div className="fixed inset-0 z-100 flex items-center justify-center px-4">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/80 backdrop-blur-md"
+            onClick={() => setShowMobileWarning(false)}
+          />
+
+          {/* Modal Content */}
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="relative bg-gray-900 border border-gray-800 p-6 rounded-2xl max-w-sm w-full shadow-2xl"
+          >
+            <button
+              onClick={() => setShowMobileWarning(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="flex flex-col items-center text-center space-y-4">
+              <div className="flex items-center justify-center gap-6 mb-2">
+                <div className="flex flex-col items-center gap-2 opacity-50">
+                  <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center">
+                    <Smartphone className="w-6 h-6 text-gray-400" />
+                  </div>
+                  <span className="text-xs text-gray-500">Mobile</span>
+                </div>
+
+                <div className="h-px w-12 bg-gray-700" />
+
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/50 flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+                    <Laptop className="w-6 h-6 text-blue-400" />
+                  </div>
+                  <span className="text-xs text-blue-400 font-medium">
+                    Laptop
+                  </span>
+                </div>
+              </div>
+
+              <h3 className="text-xl font-bold text-white">Better on Laptop</h3>
+
+              <p className="text-gray-400 text-sm leading-relaxed">
+                For the best immersive experience with animations and detailed
+                stats, we recommend viewing this site on a larger screen.
+              </p>
+
+              <button
+                onClick={() => setShowMobileWarning(false)}
+                className="w-full py-3 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition-colors mt-2"
+              >
+                Continue Anyway
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </main>
   );
 }

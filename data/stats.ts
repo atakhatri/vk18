@@ -74,7 +74,7 @@ const STATS: Stat[] = [
         sub: "Active Legend",
         icon: BarChart3,
         imageUrl: "/vk_runs.png",
-        details: [{ nation: "Australia", runs: "4600+" }, { nation: "Sri Lanka", runs: "4200+" }, { nation: "England", runs: "4900+" }],
+        details: [{ nation: "Australia", runs: "5500+" }, { nation: "Sri Lanka", runs: "4000+" }, { nation: "England", runs: "4000+" }],
     },
     {
         label: "Batting Avg",
@@ -82,7 +82,7 @@ const STATS: Stat[] = [
         sub: "in Internationals",
         icon: Target,
         imageUrl: "/vk_avg.png",
-        details: [{ nation: "Australia", avg: 55.2 }, { nation: "Sri Lanka", avg: 50.1 }, { nation: "England", avg: 58.7 }],
+        details: [{ nation: "Australia", avg: 49 }, { nation: "Pakistan", avg: 64 }, { nation: "South Africa", avg: 59 }],
     },
     {
         label: "Player of Series",
@@ -93,7 +93,7 @@ const STATS: Stat[] = [
         details: [{ nation: "Australia", pots: 5 }, { nation: "Sri Lanka", pots: 4 }, { nation: "England", pots: 6 }],
     },
     {
-        label: "Highest Score", value: "254", sub: "vs South Africa", icon: Zap, imageUrl: "/vk_highest.png", details: [{ nation: "Australia", highScore: 254 }, { nation: "Sri Lanka", highScore: 248 }, { nation: "England", highScore: 250 }]
+        label: "Highest Score", value: "254", sub: "vs South Africa", icon: Zap, imageUrl: "/vk_highest.png", details: [{ nation: "New Zealand", highScore: 211 }, { nation: "Sri Lanka", highScore: 243 }, { nation: "England", highScore: 235 }]
     },
     { label: "Captaincy Wins", value: "64%", sub: "Overall", icon: HomeIcon, imageUrl: "/vk_cap.png", details: [{ format: "Tests", winPercentage: 59 }, { format: "ODIs", winPercentage: 68 }, { format: "T20Is", winPercentage: 64 }] },
     { label: "T20I Fifties", value: "38", sub: "Second Highest", icon: Flame, imageUrl: "/vk2016.png", details: [{ nation: "Australia", fifties: 8 }, { nation: "West Indies", fifties: 6 }, { nation: "Pakistan", fifties: 5 }] },
