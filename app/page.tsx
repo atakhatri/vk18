@@ -1,4 +1,6 @@
 "use client";
+import { useState, useEffect } from "react";
+import { ArrowUp } from "lucide-react";
 import {
   motion,
   useScroll,
@@ -10,6 +12,8 @@ import {
 import { SectionHeader } from "../components/sectionheader";
 import { StatCard } from "../components/statcard";
 import { MatchRow } from "../components/matchrow";
+import { RankingPodium } from "../components/rankingpodium";
+import { InfiniteGallery } from "../components/infinitegallery";
 
 import { STATS } from "../data/stats";
 import { CHASES_STATS_DATA } from "../data/chases_stats";
@@ -22,6 +26,16 @@ export default function Home() {
     damping: 30,
     restDelta: 0.001,
   });
+
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 500);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Hero Parallax Transforms based on scroll pixel value (scrollY)
   const bgParallax = useTransform(scrollY, [0, 1000], [0, 300]); // Moves background slower (0.3x)
@@ -126,7 +140,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
             {STATS.map((stat, i) => (
-              <StatCard key={i} stat={stat} index={i} />
+              <StatCard key={i} stat={stat as any} index={i} />
             ))}
           </div>
         </div>
@@ -139,14 +153,22 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 mt-8">
             {CHASES_STATS_DATA.map((stat, i) => (
-              <StatCard key={i} stat={stat} index={i} />
+              <StatCard key={i} stat={stat as any} index={i} />
             ))}
           </div>
         </div>
       </section>
 
+      {/* --- RANKINGS SECTION --- */}
+      <section className="py-12 bg-black/20">
+        <div className="container mx-auto px-3 md:px-6">
+          <SectionHeader title="DOMINANCE" subtitle="Peak ICC Rankings" />
+          <RankingPodium />
+        </div>
+      </section>
+
       {/* --- BEST MATCHES SECTION --- */}
-      <section className="py-8 ">
+      <section id="matches" className="py-8 ">
         <div className="container mx-auto px-3 md:px-6">
           <SectionHeader title="TOP-KNOCKS" subtitle="Best Matches" />
 
@@ -159,10 +181,15 @@ export default function Home() {
       </section>
 
       {/* --- GALLERY / QUOTE SECTION --- */}
-      <section
-        id="gallery"
-        className="py-50 relative flex items-center justify-center"
-      >
+      <section id="gallery" className="py-20 relative">
+        <div className="container mx-auto px-3 md:px-6 mb-12">
+          <SectionHeader title="GALLERY" subtitle="Moments of Glory" />
+        </div>
+        <InfiniteGallery />
+      </section>
+
+      {/* --- QUOTE SECTION --- */}
+      <section className="py-40 relative flex items-center justify-center">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=2605&auto=format&fit=crop')] bg-cover bg-fixed bg-center opacity-20" />
         <div className="absolute inset-0 bg-linear-to-b from-[#050505] via-transparent to-[#050505]" />
 

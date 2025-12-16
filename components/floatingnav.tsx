@@ -8,17 +8,26 @@ const FloatingNav = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
 
   const navItems = [
-    { link: "/", icon: HomeIcon, label: "OVERVIEW" },
-    { link: "/odi", icon: Blend, label: "ODIs" },
-    { link: "/tests", icon: SwordsIcon, label: "TESTs" },
-    { link: "/t20is", icon: Flame, label: "T20Is" },
+    { link: "#hero", icon: HomeIcon, label: "OVERVIEW" },
+    { link: "#stats", icon: Blend, label: "STATS" },
+    { link: "#matches", icon: SwordsIcon, label: "MATCHES" },
+    { link: "#gallery", icon: Flame, label: "GALLERY" },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
       setIsVisible(window.scrollY > 100);
+
+      // Determine active section based on scroll position
+      navItems.forEach((item) => {
+        const el = document.getElementById(item.link.substring(1));
+        if (el && el.getBoundingClientRect().top < 300) {
+          setActiveSection(item.link.substring(1));
+        }
+      });
     };
 
     handleScroll(); // Check on mount
@@ -38,12 +47,16 @@ const FloatingNav = () => {
         <div className="flex items-center gap-2">
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActive = pathname === item.link;
+            const isActive = activeSection === item.link.substring(1);
 
             return (
               <button
                 key={item.link}
-                onClick={() => router.push(item.link)}
+                onClick={() => {
+                  document
+                    .getElementById(item.link.substring(1))
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
                 className={`group relative flex items-center gap-2 px-4 md:px-6 py-1 md:py-2 rounded-full transition-all duration-300 ${
                   isActive
                     ? "bg-blue-600 text-white shadow-lg shadow-blue-500/25"

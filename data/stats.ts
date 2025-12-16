@@ -45,7 +45,7 @@ interface highScoreDetail {
 }
 
 interface captaincyDetail {
-    nation: string;
+    format: string;
     winPercentage: number;
 }
 
@@ -56,7 +56,7 @@ interface fiftiesDetail {
 
 interface awardsDetail {
     awards: string;
-    years: number;
+    years: number | string;
 }
 
 const STATS: Stat[] = [
@@ -95,15 +95,15 @@ const STATS: Stat[] = [
     {
         label: "Highest Score", value: "254", sub: "vs South Africa", icon: Zap, imageUrl: "/vk_highest.png", details: [{ nation: "Australia", highScore: 254 }, { nation: "Sri Lanka", highScore: 248 }, { nation: "England", highScore: 250 }]
     },
-    { label: "Captaincy Wins", value: "70%", sub: "Overall", icon: HomeIcon, imageUrl: "/vk_cap.png", details: [{ nation: "Australia", winPercentage: 72 }, { nation: "Sri Lanka", winPercentage: 68 }, { nation: "England", winPercentage: 75 }] },
-    { label: "T20I Fifties", value: "28", sub: "Second Highest", icon: Flame, imageUrl: "/vk2016.png", details: [{ nation: "Australia", fifties: 8 }, { nation: "Sri Lanka", fifties: 7 }, { nation: "England", fifties: 9 }] },
+    { label: "Captaincy Wins", value: "64%", sub: "Overall", icon: HomeIcon, imageUrl: "/vk_cap.png", details: [{ format: "Tests", winPercentage: 59 }, { format: "ODIs", winPercentage: 68 }, { format: "T20Is", winPercentage: 64 }] },
+    { label: "T20I Fifties", value: "38", sub: "Second Highest", icon: Flame, imageUrl: "/vk2016.png", details: [{ nation: "Australia", fifties: 8 }, { nation: "West Indies", fifties: 6 }, { nation: "Pakistan", fifties: 5 }] },
     {
         label: "ICC Awards",
-        value: "9",
+        value: "10",
         sub: "Most by any player",
         icon: TrophyIcon,
         imageUrl: "/vk_awards.png",
-        details: [{ awards: "ICC Player of the Year", years: 3 }, { awards: "ICC ODI Player of the Year", years: 4 }, { awards: "ICC T20I Player of the Year", years: 2 }],
+        details: [{ awards: "Sir Garfield Sobers Trophy", years: 2 }, { awards: "ICC ODI Player of the Year", years: 4 }, { awards: "ICC Male Cricketer of the Decade", years: "2011-20" }],
     },
 ];
 

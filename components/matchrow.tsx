@@ -28,7 +28,7 @@ const MatchRow = ({ match, index }: { match: Match; index: number }) => {
           <div className="flex items-center gap-6">
             <div
               className={`w-3 h-16 rounded-full   ${
-                match.result === "Won" ? "bg-amber-500" : "bg-red-500"
+                match.result === "Won" ? "bg-blue-500" : "bg-red-500"
               } group-hover:h-20 transition-all duration-300 hidden md:block`}
             />
             <div>
@@ -40,8 +40,10 @@ const MatchRow = ({ match, index }: { match: Match; index: number }) => {
                   match.opponent === "Pakistan" ? "text-green-600" : ""
                 } ${
                   match.opponent === "Australia"
-                    ? "text-yellow-500"
+                    ? "text-yellow-600"
                     : "text-blue-800"
+                } ${
+                  match.opponent === "Sri Lanka" ? "text-orange-200" : ""
                 } text-lg`}
               >
                 vs {match.opponent}

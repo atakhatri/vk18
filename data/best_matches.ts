@@ -31,6 +31,26 @@ const BEST_MATCHES: Match[] = [
         bgUrl: "/topKnocks/wankhede.jpeg",
         details: "With this knock, Kohli became the first player in history to score 50 ODI centuries, surpassing Sachin Tendulkar’s record of 49. He achieved this in Tendulkar’s home ground, with Tendulkar watching from the stands.",
     },
+    {
+        opponent: "Australia",
+        score: "115 (184) & 141 (175)",
+        date: "Dec 12, 2014",
+        venue: "Adelaide Oval",
+        result: "Lost",
+        imageUrl: "/topKnocks/vsAus2014.png",
+        bgUrl: "/topKnocks/adelaide.jpeg",
+        details: "This was Kohli's first Test as captain, filling in for the injured MS Dhoni. He scored a century in both innings, becoming only the second Indian to do so on captaincy debut. Despite his heroic effort, India lost the match by 48 runs.",
+    },
+    {
+        opponent: "Sri Lanka",
+        score: "133* (86)",
+        date: "Feb 28, 2012",
+        venue: "Hobart",
+        result: "Won",
+        imageUrl: "/topKnocks/vsSL.png",
+        bgUrl: "/topKnocks/hobart.jpeg",
+        details: "India needed to chase down 321 runs in 40 overs to stay alive in the CB series. Kohli walked in at 86/2 in the 10th over and unleashed an assault on the Sri Lankan bowlers, most notably Lasith Malinga, who conceded 24 runs in one over. India chased the target in 36.4 overs.",
+    }
 ];
 
 export { BEST_MATCHES };
