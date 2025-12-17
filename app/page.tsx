@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { ArrowUp, Laptop, Smartphone, X } from "lucide-react";
 import {
   motion,
@@ -218,6 +219,26 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      {/* Floating Draggable IPL Button */}
+      <motion.div
+        drag={true}
+        // dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+        dragElastic={0}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="md:fixed md:bottom-10 md:right-10 z-50 cursor-grab active:cursor-grabbing"
+      >
+        <Link href="/ipl">
+          <div className=" px-1 py-1 bg-white rounded-full shadow-lg shadow-white/50 backdrop-blur-md">
+            <motion.img
+              src="/ipl/ipl_logo.png"
+              alt="IPL Stats"
+              className="w-16 h-16 z-1 cursor-grab active:cursor-grabbing"
+            />
+          </div>
+        </Link>
+      </motion.div>
 
       {/* Mobile Experience Warning Modal */}
       {showMobileWarning && (
