@@ -227,7 +227,7 @@ export default function Home() {
         dragElastic={0}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        className="md:fixed md:bottom-10 md:right-10 z-50 cursor-grab active:cursor-grabbing"
+        className="fixed bottom-24 right-4 md:bottom-10 md:right-10 z-50 cursor-grab active:cursor-grabbing"
       >
         <Link href="/ipl">
           <div className=" px-1 py-1 bg-white rounded-full shadow-lg shadow-white/50 backdrop-blur-md">

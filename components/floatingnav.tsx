@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { HomeIcon, Blend, SwordsIcon, Flame } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
 
@@ -10,6 +10,8 @@ const FloatingNav = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
   const [showCredit, setShowCredit] = useState(false);
+  const isIpl = pathname?.includes("/ipl");
+  const scrollTimeout = useRef<any>(null);
 
   const navItems = [
     { link: "#hero", icon: HomeIcon, label: "OVERVIEW" },
@@ -20,7 +22,15 @@ const FloatingNav = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsVisible(window.scrollY > 100);
+      if (window.scrollY > 100) {
+        setIsVisible(true);
+        if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+        scrollTimeout.current = setTimeout(() => {
+          setIsVisible(false);
+        }, 2000);
+      } else {
+        setIsVisible(false);
+      }
       setShowCredit(window.scrollY > window.innerHeight + 200);
 
       // Determine active section based on scroll position
@@ -34,11 +44,25 @@ const FloatingNav = () => {
 
     handleScroll(); // Check on mount
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+    };
   }, []);
 
   return (
     <nav
+      onMouseEnter={() => {
+        if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+        setIsVisible(true);
+      }}
+      onMouseLeave={() => {
+        if (window.scrollY > 100) {
+          scrollTimeout.current = setTimeout(() => {
+            setIsVisible(false);
+          }, 2000);
+        }
+      }}
       className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${
         isVisible
           ? "translate-y-0 opacity-100"
@@ -61,7 +85,9 @@ const FloatingNav = () => {
                 }}
                 className={`group relative flex items-center gap-2 px-4 md:px-6 py-1 md:py-2 rounded-full transition-all duration-300 ${
                   isActive
-                    ? "bg-blue-600 text-white shadow-lg shadow-blue-500/25"
+                    ? isIpl
+                      ? "bg-red-600 text-white shadow-lg shadow-red-500/25"
+                      : "bg-blue-600 text-white shadow-lg shadow-blue-500/25"
                     : "text-gray-400 hover:text-white hover:bg-white/5"
                 }`}
               >
