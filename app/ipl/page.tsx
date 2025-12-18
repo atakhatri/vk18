@@ -401,13 +401,16 @@ export default function IplPage() {
       </section>
 
       {/* --- RUNS PROGRESSION --- */}
-      <section id="stats" className="py-24 relative z-10 bg-[#050505]">
+      <section
+        id="stats"
+        className="py-24 relative z-10 bg-[#050505] overflow-hidden"
+      >
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
             <div>
               <div className="flex items-center gap-3 mb-2">
                 <TrendingUp className="w-6 h-6 text-red-500" />
-                <span className="text-red-500 font-bold tracking-widest text-sm pl-23 md:p-0">
+                <span className="text-red-500 font-bold tracking-widest text-sm pl-2 md:p-0">
                   CONSISTENCY
                 </span>
               </div>
@@ -472,7 +475,7 @@ export default function IplPage() {
       </section>
 
       {/* --- AVERAGE & MILESTONES --- */}
-      <section className="md:py-24 relative z-10 bg-gradient-to-b from-[#050505] to-[#050505]">
+      <section className="md:py-24 relative z-10 bg-gradient-to-b from-[#050505] to-[#050505] overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Average Chart */}
