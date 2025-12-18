@@ -606,7 +606,7 @@ export default function IplPage() {
         dragElastic={0}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        className="fixed bottom-24 right-4 md:bottom-10 md:right-10 z-50 cursor-grab active:cursor-grabbing"
+        className="fixed bottom-24 right-14 md:bottom-10 md:right-10 z-50 cursor-grab active:cursor-grabbing"
       >
         <Link href="/">
           <div className=" px-4 py-4 bg-white rounded-full shadow-lg shadow-white/50 backdrop-blur-md">
