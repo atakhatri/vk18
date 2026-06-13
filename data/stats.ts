@@ -62,27 +62,27 @@ interface awardsDetail {
 const STATS: Stat[] = [
     {
         label: "Intl. Centuries",
-        value: "84",
+        value: "85",
         sub: "Second Highest",
         icon: Trophy,
         imageUrl: "/vk_centuries.png",
-        details: [{ nation: "Australia", centuries: 17 }, { nation: "Sri Lanka", centuries: 15 }, { nation: "England", centuries: 14 }],
+        details: [{ nation: "Australia", centuries: 17 }, { nation: "Sri Lanka", centuries: 15 }, { nation: "West Indies", centuries: 12 }],
     },
     {
         label: "Intl. Runs",
-        value: "27K+",
+        value: "28K+",
         sub: "Active Legend",
         icon: BarChart3,
         imageUrl: "/vk_runs.png",
-        details: [{ nation: "Australia", runs: "5500+" }, { nation: "Sri Lanka", runs: "4000+" }, { nation: "England", runs: "4000+" }],
+        details: [{ nation: "Australia", runs: "5500+" }, { nation: "Sri Lanka", runs: "4000+" }, { nation: "West Indies", runs: "4000+" }],
     },
     {
         label: "Batting Avg",
-        value: "52.38",
+        value: "52.58",
         sub: "in Internationals",
         icon: Target,
         imageUrl: "/vk_avg.png",
-        details: [{ nation: "Australia", avg: 49 }, { nation: "Pakistan", avg: 64 }, { nation: "South Africa", avg: 59 }],
+        details: [{ nation: "Australia", avg: 50 }, { nation: "Pakistan", avg: 51 }, { nation: "South Africa", avg: 52 }],
     },
     {
         label: "Player of Series",

@@ -6,7 +6,7 @@ interface Trophies {
 
 
 const TROPHIES: Trophies[] = [
-    { url: "/trophies/IPL.jpeg", title: "IPL Trophy", details: ["after the wait of 18 long years, world witnesses Virat Kohli lifting the IPL trophy."] },
+    { url: "/trophies/IPL.jpeg", title: "IPL Trophy", details: ["after the wait of 18 long years, world witnesses Virat Kohli lifting the IPL trophy. and in very next season, he won it again."] },
     { url: "/trophies/CT.jpeg", title: "Champions Trophy", details: ["Champions Trophy winner in years 2013 and 2025, in both the Tournaments Virat Played a crucial role. India won the final against England in 2013 and New Zealand in 2025."] },
     { url: "/trophies/CWC.jpeg", title: "Cricket World Cup", details: ["Cricket World Cup 2011, India won the final against Sri Lanka. from hitting century in opening match to playing a crucial 35 in the final."] },
     { url: "/trophies/T20WC.jpeg", title: "T20 World Cup", details: ["T20 World Cup 2024, India won the final against Australia. after a long wait of 12 years for am international trophy, India lifts the t20wc trophy with Kohli being POTM in the final with a gem of an innings of 76 runs."] },

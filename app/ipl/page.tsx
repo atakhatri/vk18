@@ -65,7 +65,7 @@ const PartnershipRow = ({ data, index }: { data: any; index: number }) => {
   const xContent = useTransform(
     scrollYProgress,
     [0, 1],
-    isEven ? [-50, 50] : [50, -50]
+    isEven ? [-50, 50] : [50, -50],
   );
 
   return (
@@ -78,7 +78,7 @@ const PartnershipRow = ({ data, index }: { data: any; index: number }) => {
     >
       {/* Image Card */}
       <div className="w-full md:w-1/2 relative group">
-        <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-yellow-500 rounded-2xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-linear-to-r from-red-600 to-yellow-500 rounded-2xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
         <div className="relative aspect-video bg-gray-900 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
           <div className="absolute inset-0 flex items-center justify-center bg-[#0a0a0a]">
             {data.imageUrl ? (
@@ -92,7 +92,7 @@ const PartnershipRow = ({ data, index }: { data: any; index: number }) => {
             )}
           </div>
 
-          <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
+          <div className="absolute bottom-0 left-0 right-0 p-6 bg-linear-to-t from-black/90 to-transparent">
             <div className="flex items-center gap-2 text-yellow-500 font-mono text-sm tracking-widest">
               <data.icon className="w-4 h-4" />
               <span>{data.sub}</span>
@@ -121,36 +121,24 @@ const PartnershipRow = ({ data, index }: { data: any; index: number }) => {
   );
 };
 
-const WinningMoment = ({ data }: { data: any }) => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
-  const opacity = useTransform(scrollYProgress, [0.2, 0.5, 0.8], [0, 1, 0]);
-  const textY = useTransform(scrollYProgress, [0.2, 0.5], [50, 0]);
-
+const WinningMoment = ({ data, index }: { data: any; index: number }) => {
   return (
-    <section
-      ref={ref}
-      id="gallery"
-      className="relative h-screen overflow-hidden flex items-center justify-center"
-    >
-      <motion.div style={{ y }} className="absolute inset-0 z-0">
+    <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-[#050505]">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-black/60 z-10" />
+        {index === 0 ? (
+          <div className="absolute inset-0 bg-linear-to-b from-[#050505] via-black/40 to-transparent z-10" />
+        ) : (
+          <div className="absolute inset-0 bg-linear-to-t from-[#050505] via-black/40 to-transparent z-10" />
+        )}
         <div
           className="absolute inset-0 bg-cover bg-center scale-110"
           style={{ backgroundImage: `url(${data.bgimageUrl})` }}
         />
-      </motion.div>
+      </div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-black/60 to-[#050505] z-10" />
-
-      <motion.div
-        style={{ opacity, y: textY }}
-        className="relative z-20 container mx-auto px-4 text-center"
-      >
+      <div className="relative z-20 container mx-auto px-4 text-center">
         <motion.div
           initial={{ scale: 0 }}
           whileInView={{ scale: 1 }}
@@ -172,13 +160,13 @@ const WinningMoment = ({ data }: { data: any }) => {
         </div>
 
         <div className="max-w-3xl mx-auto">
-          <div className="h-1 w-32 bg-gradient-to-r from-transparent via-yellow-500 to-transparent mx-auto mb-8" />
+          <div className="h-1 w-32 bg-linear-to-r from-transparent via-yellow-500 to-transparent mx-auto mb-8" />
           <p className="text-lg md:text-2xl text-gray-300 leading-relaxed font-light drop-shadow-lg">
             {data.details}
           </p>
         </div>
-      </motion.div>
-    </section>
+      </div>
+    </div>
   );
 };
 
@@ -189,9 +177,9 @@ const OrangeCapItem = ({ data, index }: { data: any; index: number }) => {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-black/60 z-10" />
         {index === 0 ? (
-          <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-black/40 to-transparent z-10" />
+          <div className="absolute inset-0 bg-linear-to-b from-[#050505] via-black/40 to-transparent z-10" />
         ) : (
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-black/40 to-transparent z-10" />
+          <div className="absolute inset-0 bg-linear-to-t from-[#050505] via-black/40 to-transparent z-10" />
         )}
         <img
           src={data.imageUrl}
@@ -203,7 +191,7 @@ const OrangeCapItem = ({ data, index }: { data: any; index: number }) => {
       {/* 2016 Special Flame Effect */}
       {data.year === "2016" && (
         <div className="absolute inset-0 z-0 pointer-events-none opacity-60">
-          <div className="absolute inset-0 bg-gradient-to-t from-red-600/40 via-orange-500/20 to-transparent mix-blend-overlay" />
+          <div className="absolute inset-0 bg-linear-to-t from-red-600/40 via-orange-500/20 to-transparent mix-blend-overlay" />
         </div>
       )}
 
@@ -233,7 +221,7 @@ const OrangeCapItem = ({ data, index }: { data: any; index: number }) => {
         <div
           className={`text-6xl md:text-9xl font-black mb-8 ${
             data.year === "2016"
-              ? "text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500 animate-pulse drop-shadow-[0_0_30px_rgba(239,68,68,0.6)]"
+              ? "text-transparent bg-clip-text bg-linear-to-r from-orange-500 via-red-500 to-yellow-500 animate-pulse drop-shadow-[0_0_30px_rgba(239,68,68,0.6)]"
               : "text-white drop-shadow-2xl"
           }`}
         >
@@ -244,7 +232,7 @@ const OrangeCapItem = ({ data, index }: { data: any; index: number }) => {
           <div
             className={`h-1 w-32 mx-auto mb-8 rounded-full ${
               data.year === "2016"
-                ? "bg-gradient-to-r from-orange-500 to-red-600"
+                ? "bg-linear-to-r from-orange-500 to-red-600"
                 : "bg-yellow-500"
             }`}
           />
@@ -266,7 +254,7 @@ export default function IplPage() {
   const heroBlur = useTransform(
     scrollYProgress,
     [0, 0.7],
-    ["blur(0px)", "blur(20px)"]
+    ["blur(0px)", "blur(20px)"],
   );
   const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
@@ -278,19 +266,19 @@ export default function IplPage() {
   // Helper to get max value for charts
   const maxRuns = Math.max(
     ...(runsData.details?.map((d: any) => d.runs) || [0]),
-    1
+    1,
   );
   const maxAvg = Math.max(
     ...(avgData.details?.map((d: any) => d.average) || [0]), // Ensure at least 1 to avoid division by zero
-    1
+    1,
   );
   const maxCenturies = Math.max(
     ...(centuriesData.details?.map((d: any) => d.centuries) || [0]),
-    1
+    1,
   );
   const maxFifties = Math.max(
     ...(fiftiesData.details?.map((d: any) => d.fifties) || [0]),
-    1
+    1,
   );
 
   return (
@@ -300,7 +288,7 @@ export default function IplPage() {
     >
       {/* Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-600 to-yellow-500 transform origin-left z-50"
+        className="fixed top-0 left-0 right-0 h-1 bg-linear-to-r from-red-600 to-yellow-500 transform origin-left z-50"
         style={{ scaleX }}
       />
 
@@ -315,7 +303,7 @@ export default function IplPage() {
         />
 
         {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/60 via-black/40 to-black" />
 
         {/* Content with separate parallax (Blur + Move + Fade) */}
         <motion.div
@@ -343,7 +331,7 @@ export default function IplPage() {
           <div className="flex flex-wrap justify-center gap-8 mt-12">
             <div className="text-center">
               <div className="text-4xl md:text-5xl font-bold mb-2 md:text-transparent bg-linear-to-b from-red-600 to-gray-800 bg-clip-text">
-                <CountUp to={8661} />
+                <CountUp to={9336} />
               </div>
               <div className="text-sm text-red-600 tracking-widest font-bold">
                 IPL RUNS
@@ -351,7 +339,7 @@ export default function IplPage() {
             </div>
             <div className="text-center">
               <div className="text-4xl md:text-5xl font-bold mb-2 md:text-transparent bg-linear-to-b from-red-600 to-gray-800 bg-clip-text">
-                <CountUp to={8} />
+                <CountUp to={9} />
               </div>
               <div className="text-sm text-red-600 tracking-widest font-bold">
                 CENTURIES
@@ -359,7 +347,7 @@ export default function IplPage() {
             </div>
             <div className="text-center">
               <div className="text-4xl md:text-5xl font-bold mb-2 md:text-transparent bg-linear-to-b from-red-600 to-gray-800 bg-clip-text">
-                <CountUp to={39.55} decimals={2} />
+                <CountUp to={40.42} decimals={2} />
               </div>
               <div className="text-sm text-red-600 tracking-widest font-bold">
                 AVG
@@ -419,7 +407,7 @@ export default function IplPage() {
               </h2>
             </div>
             <div className="text-right">
-              <div className="text-5xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-red-600">
+              <div className="text-5xl md:text-8xl font-black text-transparent bg-clip-text bg-linear-to-r from-yellow-500 to-red-600">
                 {runsData.value}
               </div>
               <div className="text-gray-400 font-mono md:mt-2">
@@ -447,8 +435,8 @@ export default function IplPage() {
                         item.won
                           ? "bg-linear-to-t from-yellow-500 to-red-600 shadow-[0_0_20px_rgba(234,179,8,0.5)] hover:bg-linear-to-t hover:from-red-600 hover:to-yellow-500 transition-colors ease-in-out"
                           : item.orangeCap
-                          ? "bg-orange-600 hover:bg-linear-to-t hover:from-orange-600 hover:to-yellow-500 shadow-[0_0_20px_rgba(249,115,22,0.5)]"
-                          : "bg-red-600 hover:bg-gradient-to-t hover:from-red-600 hover:to-gray-500"
+                            ? "bg-orange-600 hover:bg-linear-to-t hover:from-orange-600 hover:to-yellow-500 shadow-[0_0_20px_rgba(249,115,22,0.5)]"
+                            : "bg-red-600 hover:bg-linear-to-t hover:from-red-600 hover:to-gray-500"
                       }`}
                     >
                       {item.won && (
@@ -468,14 +456,14 @@ export default function IplPage() {
             <div className="flex justify-between mt-4 text-xs text-gray-500 font-mono">
               <span>2008</span>
 
-              <span>2025</span>
+              <span>2026</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* --- AVERAGE & MILESTONES --- */}
-      <section className="md:py-24 relative z-10 bg-gradient-to-b from-[#050505] to-[#050505] overflow-hidden">
+      <section className="md:py-24 relative z-10 bg-linear-to-b from-[#050505] to-[#050505] overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Average Chart */}
@@ -502,7 +490,7 @@ export default function IplPage() {
                         whileInView={{ height: `${Math.max(height, 2)}%` }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: i * 0.03 }}
-                        className="w-full bg-red-600 hover:bg-gradient-to-t hover:from-red-600 hover:to-gray-500 rounded-t-sm transition-all"
+                        className="w-full bg-red-600 hover:bg-linear-to-t hover:from-red-600 hover:to-gray-500 rounded-t-sm transition-all"
                       />
                       <div className="absolute bottom-full mb-2 opacity-0 group-hover:opacity-100 text-xs text-yellow-500 font-bold transition-opacity">
                         {item.average}
@@ -513,7 +501,7 @@ export default function IplPage() {
               </div>
               <div className="flex justify-between mt-4 text-xs text-gray-500 font-mono">
                 <span>2008</span>
-                <span>2025</span>
+                <span>2026</span>
               </div>
             </div>
 
@@ -523,7 +511,7 @@ export default function IplPage() {
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
-                className="bg-gradient-to-r from-gray-900 to-black border border-white/10 p-8 rounded-2xl relative overflow-hidden group"
+                className="bg-linear-to-r from-gray-900 to-black border border-white/10 p-8 rounded-2xl relative overflow-hidden group"
               >
                 <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                   <Flame className="w-32 h-32 " />
@@ -543,7 +531,7 @@ export default function IplPage() {
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="bg-gradient-to-r from-gray-900 to-black border border-white/10 p-8 rounded-2xl relative overflow-hidden group"
+                className="bg-linear-to-r from-gray-900 to-black border border-white/10 p-8 rounded-2xl relative overflow-hidden group"
               >
                 <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                   <TrendingUp className="w-32 h-32" />
@@ -599,9 +587,11 @@ export default function IplPage() {
         </div>
       </section>
 
-      {WINNING_MOMENTS.map((moment, index) => (
-        <WinningMoment key={index} data={moment} />
-      ))}
+      <section className="relative z-10 bg-[#050505]">
+        {WINNING_MOMENTS.map((moment, index) => (
+          <WinningMoment key={index} data={moment} index={index} />
+        ))}
+      </section>
 
       {/* Floating Draggable IPL Button */}
       <motion.div

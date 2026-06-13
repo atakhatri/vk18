@@ -105,7 +105,7 @@ export default function Home() {
             <div className="flex flex-wrap justify-center gap-8 mt-12">
               <div className="text-center">
                 <div className="text-4xl md:text-5xl font-bold mb-2 text-white">
-                  27975
+                  28215
                 </div>
                 <div className="text-sm text-gray-400 tracking-widest font-bold">
                   INTL RUNS
@@ -113,7 +113,7 @@ export default function Home() {
               </div>
               <div className="text-center">
                 <div className="text-4xl md:text-5xl font-bold mb-2 text-white">
-                  84
+                  85
                 </div>
                 <div className="text-sm text-gray-400 tracking-widest font-bold">
                   CENTURIES
@@ -121,7 +121,7 @@ export default function Home() {
               </div>
               <div className="text-center">
                 <div className="text-4xl md:text-5xl font-bold mb-2 text-white">
-                  52.38
+                  52.58
                 </div>
                 <div className="text-sm text-gray-400 tracking-widest font-bold">
                   AVG

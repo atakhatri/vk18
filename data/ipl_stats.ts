@@ -34,7 +34,7 @@ interface iplFiftiesDetail {
 export const IPL_RUNS: iplruns[] = [
     {
         label: "Total-Runs",
-        value: "8661",
+        value: "9336",
         sub: "Highest run-scorer in IPL history",
         icon: Flame,
         details: [
@@ -56,6 +56,7 @@ export const IPL_RUNS: iplruns[] = [
             { year: "2023", runs: 639 },
             { year: "2024", runs: 741, orangeCap: true },
             { year: "2025", runs: 657, won: true },
+            { year: "2026", runs: 675, won: true },
         ],
     },
 ];
@@ -63,8 +64,8 @@ export const IPL_RUNS: iplruns[] = [
 export const IPL_AVG: iplruns[] = [
     {
         label: "BATTING-AVERAGE",
-        value: "39.55",
-        sub: "in 267* matches",
+        value: "40.42",
+        sub: "in 283* matches",
         icon: Flame,
         details: [
             { year: "2008", average: 15.00 },
@@ -85,6 +86,7 @@ export const IPL_AVG: iplruns[] = [
             { year: "2023", average: 53.25 },
             { year: "2024", average: 61.75 },
             { year: "2025", average: 54.75 },
+            { year: "2026", average: 56.25 },
         ],
     },
 ];
@@ -92,20 +94,20 @@ export const IPL_AVG: iplruns[] = [
 export const IPL_CENTURIES: iplruns[] = [
     {
         label: "Centuries",
-        value: "8",
+        value: "9",
         sub: "Most by any player in IPL",
         icon: Flame,
-        details: [{ matches: "267*", centuries: 8 }],
+        details: [{ matches: "283*", centuries: 9 }],
     },
 ];
 
 export const IPL_FIFTIES: iplruns[] = [
     {
         label: "Fifties",
-        value: "63",
+        value: "68",
         sub: "Most by any player in IPL",
         icon: Flame,
-        details: [{ matches: "267*", fifties: 63 }],
+        details: [{ matches: "283*", fifties: 68 }],
     },
 ];
 
@@ -184,5 +186,13 @@ export const WINNING_MOMENTS: winningmoments[] = [
         icon: Trophy,
         bgimageUrl: "/ipl/trophy.jpeg",
         details: "after a long wait of 18 years, The IPL trophy finally gets the touch of Virat Kohli's hands. Royal Challengers Bangalore won their first-ever IPL title by defeating Punjab Kings in a nail-biting final. and comes to IPL 2026 as defending champions.",
+    },
+    {
+        label: "Attacking Champions",
+        value: "2026",
+        sub: "Champions vs GT",
+        icon: Trophy,
+        bgimageUrl: "/ipl/trophy2.jpeg",
+        details: "Royal Challengers Bangalore won their second consecutive IPL title by defeating Gujarat Titans in a Attacking manner. This victory solidified their dominance in the league and showcased their consistent performance over the years.",
     },
 ];
