@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { ArrowUp, Laptop, Smartphone, X } from "lucide-react";
 import {
@@ -8,10 +8,11 @@ import {
   useTransform,
   useSpring,
   useMotionTemplate,
+  useInView,
+  animate,
 } from "framer-motion";
 
 import { SectionHeader } from "../components/sectionheader";
-import { StatCard } from "../components/statcard";
 import { MatchRow } from "../components/matchrow";
 import { RankingPodium } from "../components/rankingpodium";
 import { InfiniteGallery } from "../components/infinitegallery";
@@ -19,6 +20,91 @@ import { InfiniteGallery } from "../components/infinitegallery";
 import { STATS } from "../data/stats";
 import { CHASES_STATS_DATA } from "../data/chases_stats";
 import { BEST_MATCHES } from "../data/best_matches";
+
+const AnimatedCounter = ({ value }: { value: number | string }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-50px" });
+  const stringVal = value.toString();
+  // Matches an optional sign, numbers, optional decimals, and captures the rest as a suffix (e.g. "K+", "%")
+  const match = stringVal.match(/^([+-]?[\d.,]+)(.*)$/);
+  const suffix = match ? match[2] : "";
+
+  // Dynamically determine the number of decimal places based on the string value
+  const decimals =
+    match && match[1].includes(".") ? match[1].split(".")[1].length : 0;
+
+  useEffect(() => {
+    if (inView && ref.current) {
+      if (!match || isNaN(parseFloat(match[1]))) {
+        ref.current.textContent = stringVal;
+        return;
+      }
+      const numValue = parseFloat(match[1].replace(/,/g, ""));
+
+      animate(0, numValue, {
+        duration: 1.5,
+        ease: "easeOut",
+        onUpdate(val) {
+          if (ref.current) {
+            const formatted = val
+              .toFixed(decimals)
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            ref.current.textContent = formatted + suffix;
+          }
+        },
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView, stringVal, suffix, decimals]);
+
+  return <span ref={ref}>0{suffix}</span>;
+};
+
+const Typewriter = ({
+  text,
+  delay = 0,
+  speed = 0.015,
+  className = "",
+}: {
+  text: string;
+  delay?: number;
+  speed?: number;
+  className?: string;
+}) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-10px" });
+  const letters = Array.from(text);
+
+  const container = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: speed, delayChildren: delay },
+    },
+  };
+
+  const child = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
+
+  return (
+    <motion.span
+      ref={ref}
+      variants={container}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
+      className={className}
+      style={{ whiteSpace: "pre-wrap" }}
+    >
+      {letters.map((char, i) => (
+        <motion.span key={i} variants={child}>
+          {char}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+};
 
 export default function Home() {
   const { scrollY, scrollYProgress } = useScroll();
@@ -59,7 +145,7 @@ export default function Home() {
   const statsBlur = useMotionTemplate`blur(${statsBlurVal}px)`;
 
   return (
-    <main className="min-h-screen bg-[#050505] text-white selection:bg-blue-500 selection:text-white overflow-hidden">
+    <main className="min-h-screen bg-black font-sans text-white selection:bg-blue-500 selection:text-white overflow-hidden">
       {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-linear-to-r  from-amber-500 to-blue-600  transform origin-left z-50"
@@ -141,27 +227,179 @@ export default function Home() {
       </section>
 
       {/* --- STATS SECTION --- */}
-      <section id="stats" className="py-6 relative">
-        <div className="container mx-auto px-3 md:px-6">
-          <SectionHeader title="THE-NUMBERS" subtitle="Career Statistics" />
+      <section
+        id="stats"
+        className="bg-black text-white py-8 md:py-24 px-6 md:px-12 lg:px-[120px] w-full border-t border-white/10 overflow-hidden"
+      >
+        <div className="w-full max-w-[1440px] mx-auto">
+          <div className="flex flex-col lg:flex-row gap-16 lg:gap-[160px] items-stretch">
+            {/* Left Column */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 1, transition: { staggerChildren: 0.06 } },
+              }}
+              className="flex-1 flex flex-col justify-start"
+            >
+              <h2 className="text-[clamp(1.5rem,4vw,3.5rem)] font-medium tracking-tight mb-6 leading-[1.1] w-[590px] max-w-full">
+                <Typewriter text="The Numbers" delay={0} speed={0.012} />
+                <br />
+                <Typewriter text="behind " delay={0.25} speed={0.012} />
+                <span className="font-dm-serif italic font-normal text-amber-500 ml-2">
+                  <Typewriter text="The Legend" delay={0.35} speed={0.012} />
+                </span>
+              </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
-            {STATS.map((stat, i) => (
-              <StatCard key={i} stat={stat as any} index={i} />
-            ))}
+              <p className="text-base md:text-lg text-white/40 leading-relaxed font-light max-w-lg whitespace-normal mb-16">
+                <Typewriter
+                  text="A glimpse into the legendary career of the run machine. For over a decade, Virat Kohli has consistently dominated world cricket across all formats."
+                  delay={0.1}
+                  speed={0.012}
+                />
+              </p>
+
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: { staggerChildren: 0.06, delayChildren: 0.1 },
+                  },
+                }}
+                className="grid grid-cols-2 md:grid-cols-[max-content_max-content] gap-8 md:gap-x-16 lg:gap-x-24"
+              >
+                {STATS.map((stat: any, i: number) => (
+                  <motion.div
+                    key={i}
+                    variants={{
+                      hidden: { opacity: 0, y: 20 },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: { duration: 0.4, ease: "easeOut" },
+                      },
+                    }}
+                    className="flex flex-col"
+                  >
+                    <div className="text-4xl md:text-5xl lg:text-[56px] font-dm-serif tracking-tight mb-3 text-white">
+                      <AnimatedCounter value={stat.value} />
+                    </div>
+                    <div className="text-[10px] md:text-xs font-semibold text-white/40 uppercase tracking-wider">
+                      {stat.label}
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
+
+            {/* Right Column */}
+            <div className="flex justify-center lg:justify-end items-center shrink-0 lg:w-1/2">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, delay: 0, ease: "easeOut" }}
+                className="relative w-full max-w-[500px] lg:max-w-none lg:w-full aspect-square origin-center rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl"
+              >
+                <img
+                  src="/stat1.jpeg"
+                  alt="Virat Kohli Statistics"
+                  className="w-full h-full object-cover"
+                />
+                {/* Vignette Overlay */}
+                <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_100px_rgba(0,0,0,1)] bg-[radial-gradient(circle,transparent_40%,rgba(0,0,0,0.8)_120%)]" />
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* --- CHASES STATS SECTION --- */}
-      <section className="py-6 ">
-        <div className="container mx-auto px-3 md:px-6">
-          <SectionHeader title="CHASE-MASTER" subtitle="Chasing Records" />
+      <section className="bg-black text-white py-8 md:py-24 px-6 md:px-12 lg:px-[120px] w-full border-t border-white/10 overflow-hidden">
+        <div className="w-full max-w-[1440px] mx-auto">
+          <div className="flex flex-col lg:flex-row-reverse gap-16 lg:gap-[160px] items-stretch">
+            {/* Left Column (Reversed to Right) */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 1, transition: { staggerChildren: 0.06 } },
+              }}
+              className="flex-1 flex flex-col justify-start lg:pl-16"
+            >
+              <h2 className="text-[clamp(1.5rem,4vw,3.5rem)] font-medium tracking-tight mb-6 leading-[1.1] w-[590px] max-w-full">
+                <Typewriter text="The Ultimate" delay={0} speed={0.012} />
+                <br />
+                <span className="font-dm-serif italic font-normal text-amber-500">
+                  <Typewriter text="Chase Master" delay={0.25} speed={0.012} />
+                </span>
+              </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 mt-8">
-            {CHASES_STATS_DATA.map((stat, i) => (
-              <StatCard key={i} stat={stat as any} index={i} />
-            ))}
+              <p className="text-base md:text-lg text-white/40 leading-relaxed font-light max-w-lg whitespace-normal mb-16">
+                <Typewriter
+                  text="Unmatched dominance when batting second. Taking his team across the finishing line has become second nature."
+                  delay={0.1}
+                  speed={0.012}
+                />
+              </p>
+
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: { staggerChildren: 0.06, delayChildren: 0.1 },
+                  },
+                }}
+                className="grid grid-cols-2 md:grid-cols-[max-content_max-content] gap-8 md:gap-x-16 lg:gap-x-24"
+              >
+                {CHASES_STATS_DATA.map((stat: any, i: number) => (
+                  <motion.div
+                    key={i}
+                    variants={{
+                      hidden: { opacity: 0, y: 20 },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: { duration: 0.4, ease: "easeOut" },
+                      },
+                    }}
+                    className="flex flex-col"
+                  >
+                    <div className="text-4xl md:text-5xl lg:text-[56px] font-dm-serif tracking-tight mb-3 text-white">
+                      <AnimatedCounter value={stat.value} />
+                    </div>
+                    <div className="text-[10px] md:text-xs font-semibold text-white/40 uppercase tracking-wider">
+                      {stat.label}
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
+
+            {/* Right Column (Reversed to Left) */}
+            <div className="flex justify-center lg:justify-start items-center shrink-0 lg:w-1/2">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, delay: 0, ease: "easeOut" }}
+                className="relative w-full max-w-[500px] lg:max-w-none lg:w-full aspect-square origin-center rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl"
+              >
+                <img
+                  src="/stat1.jpeg"
+                  alt="Virat Kohli Chase Master"
+                  className="w-full h-full object-cover"
+                />
+                {/* Vignette Overlay */}
+                <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_100px_rgba(0,0,0,1)] bg-[radial-gradient(circle,transparent_40%,rgba(0,0,0,0.8)_120%)]" />
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>

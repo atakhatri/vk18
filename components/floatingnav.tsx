@@ -129,7 +129,7 @@ const FloatingNav = () => {
         <div className="bg-gray-900/80 backdrop-blur-xl border border-gray-700 rounded-full px-2 py-2 shadow-2xl whitespace-nowrap">
           <div className="px-4 py-2 rounded-full flex items-center">
             <span className="text-sm text-gray-400 font-medium">
-              stats as per dec-2025
+              stats as per june-2026
             </span>
           </div>
         </div>
